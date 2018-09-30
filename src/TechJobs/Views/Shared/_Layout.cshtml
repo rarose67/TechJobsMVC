@@ -24,8 +24,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Search" asp-action="Index">Search</a></li>
-                    <li><a asp-controller="List" asp-action="Index">List</a></li>
+                    @foreach (KeyValuePair<string, string> action in ViewBag.actions)
+                    {
+                        <li><a asp-controller="@action.Key" asp-action="Index">@action.Value</a></li>
+                    }
+
+
                 </ul>
             </div>
         </div>

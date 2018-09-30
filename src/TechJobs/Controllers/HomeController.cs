@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TechJobs.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : TechJobsController
     {
         public IActionResult Index()
         {
