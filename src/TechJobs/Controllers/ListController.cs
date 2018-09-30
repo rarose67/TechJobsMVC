@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using TechJobs.Models;
 
@@ -29,12 +30,16 @@ namespace TechJobs.Controllers
 
         public IActionResult Values(string column)
         {
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            ViewBag.textInfo = textInfo;
+
             if (column.Equals("all"))
             {
                 List<Dictionary<string, string>> jobs = JobData.FindAll();
                 ViewBag.title =  "All Jobs";
                 ViewBag.jobs = jobs;
                 return View("Jobs");
+                //return View("Jobs - Copy");
             }
             else
             {
@@ -49,6 +54,8 @@ namespace TechJobs.Controllers
         public IActionResult Jobs(string column, string value)
         {
             List<Dictionary<String, String>> jobs = JobData.FindByColumnAndValue(column, value);
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            ViewBag.textInfo = textInfo;
             ViewBag.title = "Jobs with " + columnChoices[column] + ": " + value;
             ViewBag.jobs = jobs;
 

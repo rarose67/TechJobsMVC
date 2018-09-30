@@ -2,6 +2,7 @@
 
 <h3>@ViewBag.jobs.Count Result(s)</h3>
 
-@{ 
-    // TODO #3 - Use the same list display from Views/Search/Index.cshtml 
+@{
+    // TODO #3 - Use the same list display from Views/Search/Index.cshtml
+    @Html.Partial("/Views/Shared/_ResultsPartial.cshtml")
 }

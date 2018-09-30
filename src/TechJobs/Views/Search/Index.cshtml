@@ -7,11 +7,25 @@
         @foreach (KeyValuePair<string, string> column in ViewBag.columns)
         {
             <span>
-                <input type="radio"
-                       name="searchType"
-                       id="@column.Key"
-                       value="@column.Key" 
-                       checked="@column.Key == 'all''"/>
+                @{
+                    if (ViewBag.searchType != null)
+                    {
+                        <input type="radio"
+                               name="searchType"
+                               id="@column.Key"
+                               value="@column.Key"
+                               checked="@column.Key.Equals(ViewBag.searchType)" />
+                    }
+                    else
+                    {
+                        <input type="radio"
+                               name="searchType"
+                               id="@column.Key"
+                               value="@column.Key"
+                               checked="@column.Key == 'all''" />
+                    }
+                }
+
                 <label for="@column.Key">@column.Value</label>
             </span>
         }
@@ -19,7 +33,16 @@
 
     <p>
         <label for="searchTerm">Keyword:</label>
-        <input type="text" name="searchTerm" id="searchTerm" />
+        @{ if (@ViewBag.searchTerm != null)
+            {
+                <input type="text" name="searchTerm" value="@ViewBag.searchTerm" id="searchTerm" />
+            }
+            else
+            {
+                <input type="text" name="searchTerm" id="searchTerm" />
+            }
+        }
+
     </p>
 
     <input type="submit" value="Search" />
@@ -30,7 +53,9 @@
 @if (ViewBag.jobs != null)
 {
 
+    <h2>@ViewBag.heading</h2>
     <h3>@ViewBag.jobs.Count Result(s)</h3>
 
-    // TODO #2 - Loop over jobs dictionary and display all job fields 
+    // TODO #2 - Loop over jobs dictionary and display all job fields
+    @Html.Partial("/Views/Shared/_ResultsPartial.cshtml")
 }
